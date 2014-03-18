@@ -10,5 +10,11 @@
         "sha1": "SHA1(timelog.phar)= 7168d7b685617b51690a1b820b6975e7b1324d45",
         "url": "http://tonypiper.github.io/timelog/downloads/timelog-0.21.phar",
         "version": "0.21"
+    },
+    {
+        "name": "timelog.phar",
+        "sha1": "04aa6bdee82462d24d9d5f73777ae6e5baa5a4f6",
+        "url": "http://tonypiper.github.io/timelog/downloads/timelog-0.23.phar",
+        "version": "0.23"
     }
 ]
