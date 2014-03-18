@@ -1,0 +1,12 @@
+{% for groupedActivity in groupedActivities %}
+Activity: {{ groupedActivity.description }} ({{ groupedActivity.activities.count }})
+    {% for activity in groupedActivity.activities %}
+{{ activity.dateStart|date('Y-m-d H:i:s') }}
+{%- if activity.dateEnd %}
+    - {{ activity.dateEnd|date('Y-m-d H:i:s') }} ({{ activity.duration|date("%H:%I:%S") }})
+{% endif %}
+    {% endfor %}
+Total: {{ groupedActivity.activities.totalDuration|date("%H:%I:%S") }}
+
+{% endfor  %}
+Grand Total: {{ groupedActivities.totalDuration|date("%H:%I:%S") }}

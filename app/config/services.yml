@@ -1,0 +1,42 @@
+parameters:
+  file_path: "%user_home%/.timelog/logs/"
+
+services:
+  timelog.storage.default: "@timelog.storage.file"
+
+  timelog.repository.activity:
+    class: \TonyPiper\TimeLog\Repository\ActivityRepository
+    arguments: ["@timelog.storage.default"]
+
+  timelog.service.filesystem:
+    class: \Symfony\Component\Filesystem\Filesystem
+
+  timelog.storage.file:
+    class: \TonyPiper\TimeLog\Storage\FileStorage
+    arguments: ["@timelog.service.filesystem", "%file_path%"]
+
+  timelog.builder.report:
+    class: \TonyPiper\TimeLog\ReportBuilder
+
+  timelog.command.report:
+    class: \TonyPiper\TimeLog\Console\Command\ReportCommand
+    arguments: ["@timelog.repository.activity", "@timelog.builder.report"]
+    tags:
+                -  { name: console.command }
+
+  timelog.command.log:
+    class: \TonyPiper\TimeLog\Console\Command\LogCommand
+    arguments: ["@timelog.repository.activity"]
+    tags:
+                -  { name: console.command }
+
+  timelog.command.edit:
+    class: \TonyPiper\TimeLog\Console\Command\EditCommand
+    arguments: ["@timelog.storage.default"]
+    tags:
+                -  { name: console.command }
+
+  timelog.command.update:
+    class: \TonyPiper\TimeLog\Console\Command\UpdateCommand
+    tags:
+                -  { name: console.command }
