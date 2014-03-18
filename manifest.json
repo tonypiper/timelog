@@ -28,5 +28,11 @@
         "sha1": "f90d7d810fefff989695c2cd39855703625e0bd7",
         "url": "http://tonypiper.github.io/timelog/downloads/timelog-0.3.4.phar",
         "version": "0.3.4"
+    },
+    {
+        "name": "timelog.phar",
+        "sha1": "f90d7d810fefff989695c2cd39855703625e0bd7",
+        "url": "http://tonypiper.github.io/timelog/downloads/timelog-0.3.5.phar",
+        "version": "0.3.5"
     }
 ]
