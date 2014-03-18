@@ -31,11 +31,6 @@ class Application
     {
         $root = __DIR__ . '/../../..';
 
-        $pharPath = Phar::running(false);
-        if (!empty($pharPath)) {
-            $root = dirname($pharPath);
-        }
-
         $container = new ContainerBuilder();
         $container->setParameter('root', $root);
         $container->setParameter('user_home', getenv('HOME'));
