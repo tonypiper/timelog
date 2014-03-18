@@ -49,8 +49,8 @@ class ActivityRepository
     }
 
     /**
-     * @param  null                  $asAt
-     * @return \DateTime|string|null
+     * @param  \DateTime|string|null $asAt
+     * @return \DateTime
      */
     protected function getAsat($asAt = null)
     {
