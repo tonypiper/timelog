@@ -24,7 +24,7 @@ git checkout gh-pages
 cp timelog.phar downloads/timelog-${TAG}.phar
 git add downloads/timelog-${TAG}.phar
 
-SHA1=$(openssl sha1 timelog.phar)
+SHA1=$(shasum timelog.phar | sed 's/ .*//')
 
 JSON='name:"timelog.phar"'
 JSON="${JSON},sha1:\"${SHA1}\""
