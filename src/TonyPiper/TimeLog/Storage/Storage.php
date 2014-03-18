@@ -23,6 +23,7 @@ interface Storage
 
     /**
      * @param Activity $activity
+     * @return void
      */
     public function saveActivity(Activity $activity);
 

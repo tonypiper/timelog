@@ -21,7 +21,7 @@ class GroupedActivity
     private $activities;
 
     /**
-     * @param $description
+     * @param string $description
      */
     public function __construct($description)
     {
@@ -59,7 +59,7 @@ class GroupedActivity
     }
 
     /**
-     * @return string
+     * @return null|integer
      */
     public function getDurationInSeconds()
     {

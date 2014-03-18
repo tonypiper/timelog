@@ -56,7 +56,7 @@ class EditCommand extends Command
     }
 
     /**
-     * @param $fileName
+     * @param string $fileName
      * @return string
      */
     protected function getCommand($fileName)

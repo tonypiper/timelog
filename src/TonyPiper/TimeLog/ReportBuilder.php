@@ -9,7 +9,6 @@
 namespace TonyPiper\TimeLog;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\Criteria;
 use TonyPiper\TimeLog\Model\ActivityCollection;
 use TonyPiper\TimeLog\Model\GroupedActivityCollection;
@@ -37,7 +36,7 @@ class ReportBuilder
      * @param  ActivityCollection $activities
      * @param                     $sortOrder
      * @param  bool               $grouped
-     * @return array|string
+     * @return string
      */
     public function generateReport(ActivityCollection $activities, $sortOrder = null, $grouped = false)
     {
@@ -64,7 +63,7 @@ class ReportBuilder
     /**
      * @param  ActivityCollection $activities
      * @param                     $sortOrder
-     * @return array
+     * @return string
      */
     public function groupedReport(ActivityCollection $activities, $sortOrder = null)
     {
@@ -79,8 +78,8 @@ class ReportBuilder
     /**
      * @param  ArrayCollection|ActivityCollection $activities
      * @param                                     $sortOrder
-     * @param                                     $defaultSortOrder
-     * @return Collection|static
+     * @param                                     string $defaultSortOrder
+     * @return ArrayCollection
      */
     protected function sort(ArrayCollection $activities, $sortOrder, $defaultSortOrder)
     {
@@ -106,7 +105,7 @@ class ReportBuilder
     }
 
     /**
-     * @return array
+     * @return string[]
      */
     public function getValidSortOrder()
     {
