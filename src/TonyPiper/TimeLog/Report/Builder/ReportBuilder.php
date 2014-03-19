@@ -10,7 +10,6 @@ namespace TonyPiper\TimeLog\Report\Builder;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Criteria;
-use string;
 use TonyPiper\TimeLog\Model\ActivityCollection;
 use Twig_Environment;
 use Twig_Extension;
