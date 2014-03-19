@@ -6,6 +6,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use TonyPiper\TimeLog\Report\Builder\ReportBuilder;
+use TonyPiper\TimeLog\Report\Builder\ReportBuilderInterface;
 use TonyPiper\TimeLog\Repository\ActivityRepository;
 
 /**
@@ -14,7 +15,7 @@ use TonyPiper\TimeLog\Repository\ActivityRepository;
  * Date: 14/03/2014
  * Time: 08:45
  */
-class ReportCommand extends Command
+abstract class ReportCommand extends Command
 {
     /**
      * @var ActivityRepository
@@ -36,45 +37,42 @@ class ReportCommand extends Command
         $this->reportBuilder = $reportBuilder;
     }
 
-    public function configure()
+    protected function addDateOption()
     {
-        $this->setName('report')
-            ->setDescription('Generate a report');
-
         $this->addOption(
             'date',
             null,
             InputOption::VALUE_OPTIONAL,
             'the date for the report - must be string that can be understood by strtotime'
         );
+    }
 
+    protected function addGroupedOption()
+    {
         $this->addOption('grouped', null, InputOption::VALUE_NONE, 'whether to sort and group the output');
+    }
 
+    protected function addSortOrderOption()
+    {
         $this->addOption('sortOrder', null, InputOption::VALUE_OPTIONAL, 'how to sort', null);
     }
 
     /**
-     * @param  InputInterface            $input
-     * @param  OutputInterface           $output
-     * @throws \InvalidArgumentException
-     * @return int|null|void
+     * @return \TonyPiper\TimeLog\Repository\ActivityRepository
      */
-    protected function execute(InputInterface $input, OutputInterface $output)
+    public function getActivityRepository()
     {
-        if (!$this->reportBuilder->validateSortOrder($input->getOption('sortOrder'))) {
-            throw new \InvalidArgumentException('Invalid Sort Order');
-        }
-
-        $activities = $this->activityRepository->findActivities(
-            $input->getOption('date')
-        );
-
-        $report = $this->reportBuilder->generateReport(
-            $activities,
-            $input->getOption('sortOrder'),
-            $input->getOption('grouped')
-        );
-
-        $output->writeln($report);
+        return $this->activityRepository;
     }
+
+    /**
+     * @return ReportBuilderInterface
+     */
+    public function getReportBuilder()
+    {
+        return $this->reportBuilder;
+    }
+
+
+
 }

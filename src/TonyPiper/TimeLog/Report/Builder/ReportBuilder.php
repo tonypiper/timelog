@@ -20,7 +20,7 @@ use Twig_Extension;
  * Class ReportBuilder
  * @package TonyPiper\TimeLog
  */
-class ReportBuilder
+abstract class ReportBuilder
 {
 
     private $twig;
@@ -36,18 +36,11 @@ class ReportBuilder
     }
 
     /**
-     * @param  ActivityCollection $activities
-     * @param                     $sortOrder
-     * @param  bool               $grouped
-     * @return string
+     * @return Twig_Environment
      */
-    public function generateReport(ActivityCollection $activities, $sortOrder = null, $grouped = false)
+    public function getTwig()
     {
-        if ($grouped) {
-            return $this->groupedReport($activities, $sortOrder);
-        }
-
-        return $this->basicReport($activities, $sortOrder);
+        return $this->twig;
     }
 
     /**
@@ -55,28 +48,20 @@ class ReportBuilder
      * @param                     $sortOrder
      * @return string
      */
-    public function basicReport(ActivityCollection $activities, $sortOrder = null)
+    final public function render(ActivityCollection $activities, $sortOrder = null)
     {
-        return $this->twig->render(
-            'basic.txt.twig',
-            array('activities' => $this->sort($activities, $sortOrder, 'dateStart'))
-        );
+        $this->validateSortOrder($sortOrder);
+
+        return $this->doRender($activities, $sortOrder);
     }
 
     /**
-     * @param  ActivityCollection $activities
-     * @param                     $sortOrder
+     * @param ActivityCollection $activities
+     * @param null               $sortOrder
      * @return string
+     * @throws \Exception
      */
-    public function groupedReport(ActivityCollection $activities, $sortOrder = null)
-    {
-        $groupedActivities = GroupedActivityCollection::fromActivityCollection($activities);
-
-        return $this->twig->render(
-            'grouped.txt.twig',
-            array('groupedActivities' => $this->sort($groupedActivities, $sortOrder, 'description'))
-        );
-    }
+    abstract protected function doRender(ActivityCollection $activities, $sortOrder = null);
 
     /**
      * @param  ArrayCollection|ActivityCollection $activities
@@ -100,19 +85,30 @@ class ReportBuilder
 
     /**
      * @param $sortOrder
-     * @return bool
+     * @throws \InvalidArgumentException
      */
     public function validateSortOrder($sortOrder)
     {
-        return $sortOrder ==null || in_array($sortOrder, $this->getValidSortOrder());
+        if (!$this->isValidSortOrder($sortOrder)) {
+            throw new \InvalidArgumentException(sprintf('Invalid Sort Order %s - choose one of %s', $sortOrder, join(
+                ", ",
+                $this->getValidSortOrder()
+            )));
+        }
     }
 
     /**
-     * @return string[]
+     * @param $sortOrder
+     * @return bool
      */
-    public function getValidSortOrder()
+    public function isValidSortOrder($sortOrder)
     {
-        return array('description', 'dateStart', 'dateEnd', 'duration');
+        return $sortOrder === null || in_array($sortOrder, $this->getValidSortOrder());
     }
+
+    /**
+     * @return array
+     */
+    abstract public function getValidSortOrder();
 
 }

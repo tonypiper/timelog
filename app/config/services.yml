@@ -12,13 +12,15 @@ services:
     class: \TonyPiper\TimeLog\Storage\FileStorage
     arguments: ["@timelog.service.filesystem", "%file_path%"]
 
-  timelog.builder.report:
-    class: \TonyPiper\TimeLog\Report\Builder\ReportBuilder
-    arguments: ["@timelog.twig.extension.filter.report"]
+  timelog.command.report.basic:
+    class: \TonyPiper\TimeLog\Console\Command\BasicReportCommand
+    arguments: ["@timelog.repository.activity", "@timelog.report_builder.basic"]
+    tags:
+                -  { name: console.command }
 
-  timelog.command.report:
-    class: \TonyPiper\TimeLog\Console\Command\ReportCommand
-    arguments: ["@timelog.repository.activity", "@timelog.builder.report"]
+  timelog.command.report.grouped:
+    class: \TonyPiper\TimeLog\Console\Command\GroupedReportCommand
+    arguments: ["@timelog.repository.activity", "@timelog.report_builder.grouped"]
     tags:
                 -  { name: console.command }
 
@@ -42,3 +44,12 @@ services:
   timelog.twig.extension.filter.report:
     class: \TonyPiper\TimeLog\Twig\Extension\ReportFilterExtension
     arguments: ["%filters%"]
+
+  timelog.report_builder.basic:
+    class: \TonyPiper\TimeLog\Report\Builder\BasicReportBuilder
+    arguments: ["@timelog.twig.extension.filter.report"]
+
+  timelog.report_builder.grouped:
+    class: \TonyPiper\TimeLog\Report\Builder\GroupedReportBuilder
+    arguments: ["@timelog.twig.extension.filter.report"]
+
