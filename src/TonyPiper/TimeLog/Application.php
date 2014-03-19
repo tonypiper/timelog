@@ -8,7 +8,6 @@
 
 namespace TonyPiper\TimeLog;
 
-use Phar;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\Console\Application as ConsoleApplication;
 use Symfony\Component\Console\Command\Command;
@@ -16,7 +15,6 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;
 use Symfony\Component\Yaml\Yaml;
-use TonyPiper\TimeLog\Twig\Extension\ReportFilterExtension;
 
 /**
  * Class Application
@@ -44,7 +42,6 @@ class Application
 
         $this->container->setParameter('root', $root);
         $this->container->setParameter('user_home', getenv('HOME'));
-
 
         $loader = new YamlFileLoader($this->container, new FileLocator($root));
         $loader->load($root . '/app/config/services.yml');

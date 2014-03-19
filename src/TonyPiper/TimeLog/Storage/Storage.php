@@ -22,7 +22,7 @@ interface Storage
     public function getActivities(\DateTime $asAt);
 
     /**
-     * @param Activity $activity
+     * @param  Activity $activity
      * @return void
      */
     public function saveActivity(Activity $activity);

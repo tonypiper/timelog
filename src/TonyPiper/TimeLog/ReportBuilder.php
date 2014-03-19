@@ -80,7 +80,7 @@ class ReportBuilder
     /**
      * @param  ArrayCollection|ActivityCollection $activities
      * @param                                     $sortOrder
-     * @param                                     string $defaultSortOrder
+     * @param  string                             $defaultSortOrder
      * @return ArrayCollection
      */
     protected function sort(ArrayCollection $activities, $sortOrder, $defaultSortOrder)

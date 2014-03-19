@@ -8,7 +8,6 @@
 
 namespace TonyPiper\TimeLog\Twig\Extension;
 
-
 class ReportFilterExtension extends \Twig_Extension
 {
 
