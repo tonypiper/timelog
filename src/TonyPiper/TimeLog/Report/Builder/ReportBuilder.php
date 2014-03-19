@@ -44,7 +44,7 @@ abstract class ReportBuilder
 
     /**
      * @param  ActivityCollection $activities
-     * @param  string             $sortOrder
+     * @param  string|null        $sortOrder
      * @return string
      */
     final public function render(ActivityCollection $activities, $sortOrder = null)
@@ -56,7 +56,7 @@ abstract class ReportBuilder
 
     /**
      * @param  ActivityCollection $activities
-     * @param  null               $sortOrder
+     * @param  string|null        $sortOrder
      * @return string
      * @throws \Exception
      */
@@ -83,7 +83,7 @@ abstract class ReportBuilder
     }
 
     /**
-     * @param $sortOrder
+     * @param  string                    $sortOrder
      * @throws \InvalidArgumentException
      */
     public function validateSortOrder($sortOrder)
@@ -97,7 +97,7 @@ abstract class ReportBuilder
     }
 
     /**
-     * @param $sortOrder
+     * @param  string $sortOrder
      * @return bool
      */
     public function isValidSortOrder($sortOrder)

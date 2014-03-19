@@ -8,7 +8,6 @@
 
 namespace TonyPiper\TimeLog\Report\Builder;
 
-use string;
 use TonyPiper\TimeLog\Model\ActivityCollection;
 use TonyPiper\TimeLog\Model\GroupedActivityCollection;
 
@@ -21,7 +20,7 @@ class GroupedReportBuilder extends ReportBuilder
 
     /**
      * @param  ActivityCollection $activities
-     * @param                     $sortOrder
+     * @param  string|null        $sortOrder
      * @return string
      */
     public function doRender(ActivityCollection $activities, $sortOrder = null)
