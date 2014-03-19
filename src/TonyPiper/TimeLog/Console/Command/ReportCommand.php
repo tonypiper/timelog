@@ -4,6 +4,7 @@ namespace TonyPiper\TimeLog\Console\Command;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputOption;
 use TonyPiper\TimeLog\Report\Builder\ReportBuilder;
+use TonyPiper\TimeLog\Report\Builder\ReportBuilderInterface;
 use TonyPiper\TimeLog\Repository\ActivityRepository;
 
 /**
@@ -24,10 +25,10 @@ abstract class ReportCommand extends Command
     private $reportBuilder;
 
     /**
-     * @param ActivityRepository                              $activityRepository
-     * @param \TonyPiper\TimeLog\Report\Builder\ReportBuilder $reportBuilder
+     * @param ActivityRepository     $activityRepository
+     * @param ReportBuilderInterface $reportBuilder
      */
-    public function __construct(ActivityRepository $activityRepository, ReportBuilder $reportBuilder)
+    public function __construct(ActivityRepository $activityRepository, ReportBuilderInterface $reportBuilder)
     {
         parent::__construct();
         $this->activityRepository = $activityRepository;
@@ -44,18 +45,13 @@ abstract class ReportCommand extends Command
         );
     }
 
-    protected function addGroupedOption()
-    {
-        $this->addOption('grouped', null, InputOption::VALUE_NONE, 'whether to sort and group the output');
-    }
-
     protected function addSortOrderOption()
     {
         $this->addOption('sortOrder', null, InputOption::VALUE_OPTIONAL, 'how to sort', null);
     }
 
     /**
-     * @return \TonyPiper\TimeLog\Repository\ActivityRepository
+     * @return ActivityRepository
      */
     public function getActivityRepository()
     {
@@ -63,7 +59,7 @@ abstract class ReportCommand extends Command
     }
 
     /**
-     * @return ReportBuilder
+     * @return ReportBuilderInterface
      */
     public function getReportBuilder()
     {
