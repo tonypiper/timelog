@@ -6,10 +6,11 @@
  * Time: 16:03
  */
 
-namespace TonyPiper\TimeLog;
+namespace TonyPiper\TimeLog\Report\Builder;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Criteria;
+use string;
 use TonyPiper\TimeLog\Model\ActivityCollection;
 use TonyPiper\TimeLog\Model\GroupedActivityCollection;
 use Twig_Environment;
