@@ -69,7 +69,7 @@ class Application
     }
 
     /**
-     * @param string $root
+     * @param  string $root
      * @return array
      */
     protected function buildConfig($root)

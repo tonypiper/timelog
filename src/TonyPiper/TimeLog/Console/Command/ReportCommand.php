@@ -4,7 +4,6 @@ namespace TonyPiper\TimeLog\Console\Command;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputOption;
 use TonyPiper\TimeLog\Report\Builder\ReportBuilder;
-use TonyPiper\TimeLog\Report\Builder\ReportBuilderInterface;
 use TonyPiper\TimeLog\Repository\ActivityRepository;
 
 /**
@@ -25,10 +24,10 @@ abstract class ReportCommand extends Command
     private $reportBuilder;
 
     /**
-     * @param ActivityRepository     $activityRepository
-     * @param ReportBuilderInterface $reportBuilder
+     * @param ActivityRepository $activityRepository
+     * @param ReportBuilder      $reportBuilder
      */
-    public function __construct(ActivityRepository $activityRepository, ReportBuilderInterface $reportBuilder)
+    public function __construct(ActivityRepository $activityRepository, ReportBuilder $reportBuilder)
     {
         parent::__construct();
         $this->activityRepository = $activityRepository;
@@ -59,7 +58,7 @@ abstract class ReportCommand extends Command
     }
 
     /**
-     * @return ReportBuilderInterface
+     * @return ReportBuilder
      */
     public function getReportBuilder()
     {

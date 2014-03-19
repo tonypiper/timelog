@@ -19,7 +19,6 @@ class GroupedReportCommand extends ReportCommand
             ->setDescription('Generate a report');
 
         $this->addDateOption();
-        $this->addGroupedOption();
         $this->addSortOrderOption();
     }
 

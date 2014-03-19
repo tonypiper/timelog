@@ -19,7 +19,6 @@ class BasicReportCommand extends ReportCommand
             ->setDescription('Generate a basic report');
 
         $this->addDateOption();
-        $this->addGroupedOption();
         $this->addSortOrderOption();
     }
 
