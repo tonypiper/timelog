@@ -3,10 +3,7 @@ namespace TonyPiper\TimeLog\Console\Command;
 
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use TonyPiper\TimeLog\Report\Builder\ReportBuilder;
-use TonyPiper\TimeLog\Repository\ActivityRepository;
 
 /**
  * Created by PhpStorm.

@@ -10,7 +10,6 @@ namespace TonyPiper\TimeLog\Report\Builder;
 use string;
 use TonyPiper\TimeLog\Model\ActivityCollection;
 
-
 /**
  * Class ReportBuilder
  * @package TonyPiper\TimeLog

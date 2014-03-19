@@ -12,7 +12,6 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Criteria;
 use string;
 use TonyPiper\TimeLog\Model\ActivityCollection;
-use TonyPiper\TimeLog\Model\GroupedActivityCollection;
 use Twig_Environment;
 use Twig_Extension;
 
@@ -45,7 +44,7 @@ abstract class ReportBuilder
 
     /**
      * @param  ActivityCollection $activities
-     * @param                     $sortOrder
+     * @param  string             $sortOrder
      * @return string
      */
     final public function render(ActivityCollection $activities, $sortOrder = null)
@@ -56,8 +55,8 @@ abstract class ReportBuilder
     }
 
     /**
-     * @param ActivityCollection $activities
-     * @param null               $sortOrder
+     * @param  ActivityCollection $activities
+     * @param  null               $sortOrder
      * @return string
      * @throws \Exception
      */
@@ -65,7 +64,7 @@ abstract class ReportBuilder
 
     /**
      * @param  ArrayCollection|ActivityCollection $activities
-     * @param                                     $sortOrder
+     * @param  string                             $sortOrder
      * @param  string                             $defaultSortOrder
      * @return ArrayCollection
      */
