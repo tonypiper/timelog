@@ -39,7 +39,6 @@ class Application
         $parameters = new ParameterBag($config);
 
         $this->container = new ContainerBuilder($parameters);
-
         $this->container->setParameter('root', $root);
         $this->container->setParameter('user_home', getenv('HOME'));
 
@@ -48,18 +47,23 @@ class Application
 
         $this->application = new ConsoleApplication('timelog', '@package_version@');
 
-        $services = $this->container->findTaggedServiceIds('console.command');
-        foreach (array_keys($services) as $serviceId) {
-            /** @var $service Command */
-            $service = $this->container->get($serviceId);
-            $this->application->add($service);
-        }
+        $this->addCommands();
 
     }
 
     public function run()
     {
         $this->application->run();
+    }
+
+    protected function addCommands()
+    {
+        $services = $this->container->findTaggedServiceIds('console.command');
+        foreach (array_keys($services) as $serviceId) {
+            /** @var $service Command */
+            $service = $this->container->get($serviceId);
+            $this->application->add($service);
+        }
     }
 
 }
