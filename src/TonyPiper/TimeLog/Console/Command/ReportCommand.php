@@ -5,7 +5,7 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use TonyPiper\TimeLog\ReportBuilder;
+use TonyPiper\TimeLog\Report\Builder\ReportBuilder;
 use TonyPiper\TimeLog\Repository\ActivityRepository;
 
 /**
@@ -21,13 +21,13 @@ class ReportCommand extends Command
      */
     private $activityRepository;
     /**
-     * @var \TonyPiper\TimeLog\ReportBuilder
+     * @var \TonyPiper\TimeLog\Report\Builder\ReportBuilder
      */
     private $reportBuilder;
 
     /**
-     * @param ActivityRepository $activityRepository
-     * @param ReportBuilder      $reportBuilder
+     * @param ActivityRepository                              $activityRepository
+     * @param \TonyPiper\TimeLog\Report\Builder\ReportBuilder $reportBuilder
      */
     public function __construct(ActivityRepository $activityRepository, ReportBuilder $reportBuilder)
     {

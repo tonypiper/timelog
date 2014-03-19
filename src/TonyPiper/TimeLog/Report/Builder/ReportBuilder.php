@@ -30,7 +30,7 @@ class ReportBuilder
      */
     public function __construct(Twig_Extension $extension)
     {
-        $loader = new \Twig_Loader_Filesystem(__DIR__ . '/Report/templates');
+        $loader = new \Twig_Loader_Filesystem(__DIR__ . '/../templates');
         $this->twig = new Twig_Environment($loader);
         $this->twig->addExtension($extension);
     }

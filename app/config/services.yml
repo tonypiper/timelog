@@ -13,7 +13,7 @@ services:
     arguments: ["@timelog.service.filesystem", "%file_path%"]
 
   timelog.builder.report:
-    class: \TonyPiper\TimeLog\ReportBuilder
+    class: \TonyPiper\TimeLog\Report\Builder\ReportBuilder
     arguments: ["@timelog.twig.extension.filter.report"]
 
   timelog.command.report:
