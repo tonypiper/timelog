@@ -4,7 +4,6 @@ namespace TonyPiper\TimeLog\Console\Command;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputOption;
 use TonyPiper\TimeLog\Report\Builder\ReportBuilder;
-use TonyPiper\TimeLog\Report\Builder\ReportBuilderInterface;
 use TonyPiper\TimeLog\Repository\ActivityRepository;
 
 /**
@@ -64,7 +63,7 @@ abstract class ReportCommand extends Command
     }
 
     /**
-     * @return ReportBuilderInterface
+     * @return ReportBuilder
      */
     public function getReportBuilder()
     {

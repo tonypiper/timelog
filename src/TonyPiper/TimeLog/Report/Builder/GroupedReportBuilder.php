@@ -42,7 +42,7 @@ class GroupedReportBuilder extends ReportBuilder
     }
 
     /**
-     * @return array
+     * @return string[]
      */
     public function getValidFormats()
     {

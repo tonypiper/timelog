@@ -39,7 +39,7 @@ class BasicReportBuilder extends ReportBuilder implements ReportBuilderInterface
     }
 
     /**
-     * @return array
+     * @return string[]
      */
     public function getValidFormats()
     {
