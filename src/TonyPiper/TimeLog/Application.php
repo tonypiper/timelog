@@ -59,16 +59,33 @@ class Application
     protected function buildContainer()
     {
         $root = __DIR__ . '/../../..';
+        $config = $this->buildConfig($root);
 
-        $config = Yaml::parse($root . '/app/config/config.yml');
         $parameters = new ParameterBag($config);
 
         $this->container = new ContainerBuilder($parameters);
-        $this->container->setParameter('root', $root);
-        $this->container->setParameter('user_home', getenv('HOME'));
-
         $loader = new YamlFileLoader($this->container, new FileLocator($root));
         $loader->load($root . '/app/config/services.yml');
+    }
+
+    /**
+     * @param $root
+     * @return array
+     */
+    protected function buildConfig($root)
+    {
+        $homeDirectory = getenv('HOME');
+
+        $config = Yaml::parse($root . '/app/config/config.yml');
+        $config['root'] = $root;
+        $config['user_home'] = $homeDirectory;
+        $userConfigFile = $homeDirectory . '/.timelog/config.yml';
+        if (file_exists($userConfigFile)) {
+            $userConfig = Yaml::parse($userConfigFile);
+            $config = array_merge_recursive($config, $userConfig);
+        }
+
+        return $config;
     }
 
 }
