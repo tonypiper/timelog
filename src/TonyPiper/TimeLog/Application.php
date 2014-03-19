@@ -33,17 +33,7 @@ class Application
 
     public function boot()
     {
-        $root = __DIR__ . '/../../..';
-
-        $config=Yaml::parse($root.'/app/config/config.yml');
-        $parameters = new ParameterBag($config);
-
-        $this->container = new ContainerBuilder($parameters);
-        $this->container->setParameter('root', $root);
-        $this->container->setParameter('user_home', getenv('HOME'));
-
-        $loader = new YamlFileLoader($this->container, new FileLocator($root));
-        $loader->load($root . '/app/config/services.yml');
+        $this->buildContainer();
 
         $this->application = new ConsoleApplication('timelog', '@package_version@');
 
@@ -64,6 +54,21 @@ class Application
             $service = $this->container->get($serviceId);
             $this->application->add($service);
         }
+    }
+
+    protected function buildContainer()
+    {
+        $root = __DIR__ . '/../../..';
+
+        $config = Yaml::parse($root . '/app/config/config.yml');
+        $parameters = new ParameterBag($config);
+
+        $this->container = new ContainerBuilder($parameters);
+        $this->container->setParameter('root', $root);
+        $this->container->setParameter('user_home', getenv('HOME'));
+
+        $loader = new YamlFileLoader($this->container, new FileLocator($root));
+        $loader->load($root . '/app/config/services.yml');
     }
 
 }
