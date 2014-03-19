@@ -1,6 +1,3 @@
-parameters:
-  file_path: "%user_home%/.timelog/logs/"
-
 services:
   timelog.storage.default: "@timelog.storage.file"
 
@@ -17,6 +14,7 @@ services:
 
   timelog.builder.report:
     class: \TonyPiper\TimeLog\ReportBuilder
+    arguments: ["@timelog.twig.extension.filter.report"]
 
   timelog.command.report:
     class: \TonyPiper\TimeLog\Console\Command\ReportCommand
@@ -40,3 +38,7 @@ services:
     class: \TonyPiper\TimeLog\Console\Command\UpdateCommand
     tags:
                 -  { name: console.command }
+
+  timelog.twig.extension.filter.report:
+    class: \TonyPiper\TimeLog\Twig\Extension\ReportFilterExtension
+    arguments: ["%filters%"]

@@ -1,1 +1,4 @@
-base_path: ~/.timelog
+file_path: "%user_home%/.timelog/logs/"
+
+filters:
+  - ["#timelog#", "timelog (http://github.com/tonypiper/timelog"]

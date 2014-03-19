@@ -14,6 +14,9 @@ use Symfony\Component\Console\Application as ConsoleApplication;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;
+use Symfony\Component\Yaml\Yaml;
+use TonyPiper\TimeLog\Twig\Extension\ReportFilterExtension;
 
 /**
  * Class Application
@@ -27,23 +30,31 @@ class Application
      */
     private $application;
 
+    /** @var  ContainerBuilder */
+    private $container;
+
     public function boot()
     {
         $root = __DIR__ . '/../../..';
 
-        $container = new ContainerBuilder();
-        $container->setParameter('root', $root);
-        $container->setParameter('user_home', getenv('HOME'));
+        $config=Yaml::parse($root.'/app/config/config.yml');
+        $parameters = new ParameterBag($config);
 
-        $loader = new YamlFileLoader($container, new FileLocator($root));
+        $this->container = new ContainerBuilder($parameters);
+
+        $this->container->setParameter('root', $root);
+        $this->container->setParameter('user_home', getenv('HOME'));
+
+
+        $loader = new YamlFileLoader($this->container, new FileLocator($root));
         $loader->load($root . '/app/config/services.yml');
 
         $this->application = new ConsoleApplication('timelog', '@package_version@');
 
-        $services = $container->findTaggedServiceIds('console.command');
+        $services = $this->container->findTaggedServiceIds('console.command');
         foreach (array_keys($services) as $serviceId) {
             /** @var $service Command */
-            $service = $container->get($serviceId);
+            $service = $this->container->get($serviceId);
             $this->application->add($service);
         }
 

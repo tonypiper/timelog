@@ -13,6 +13,7 @@ use Doctrine\Common\Collections\Criteria;
 use TonyPiper\TimeLog\Model\ActivityCollection;
 use TonyPiper\TimeLog\Model\GroupedActivityCollection;
 use Twig_Environment;
+use Twig_Extension;
 
 /**
  * Class ReportBuilder
@@ -26,10 +27,11 @@ class ReportBuilder
     /**
      *
      */
-    public function __construct()
+    public function __construct(Twig_Extension $extension)
     {
         $loader = new \Twig_Loader_Filesystem(__DIR__ . '/Report');
         $this->twig = new Twig_Environment($loader);
+        $this->twig->addExtension($extension);
     }
 
     /**

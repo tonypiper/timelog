@@ -1,7 +1,7 @@
 {% for activity in activities %}
 {{ activity.dateStart|date('Y-m-d H:i:s') }}
 {%- if activity.duration %} ({{ activity.duration|date("%H:%I:%S") }}){% else %}           {% endif %}
- - {{ activity.description }}
+ - {{ activity.description|filter }}
 {% endfor %}
 
 Total: {{ activities.totalDuration|date("%H:%I:%S") }}
